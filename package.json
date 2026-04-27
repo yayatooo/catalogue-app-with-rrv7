@@ -9,8 +9,10 @@
     "typecheck": "react-router typegen && tsc",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:push": "drizzle-kit push"
+    "db:seed": "bun run app/src/db/seed.ts",
+    "db:drop": "drizzle-kit drop"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.8",
