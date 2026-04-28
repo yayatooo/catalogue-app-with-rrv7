@@ -14,9 +14,7 @@ export default [
   ]),
 
   // ─── Auth ─────────────────────────────────────────────────────────────────────
-  layout("routes/auth.tsx", [
-    route("login", "routes/auth/login.tsx"),
-  ]),
+  layout("routes/auth.tsx", [route("login", "routes/auth/login.tsx")]),
   route("logout", "routes/auth/logout.tsx"),
 
   // ─── Admin ───────────────────────────────────────────────────────────────────
@@ -24,8 +22,11 @@ export default [
     route("admin/categories", "routes/admin/categories.tsx"),
     route("admin/attributes", "routes/admin/attribute.tsx"),
     route("admin/catalogue", "routes/admin/catalogue.tsx"),
+    route("admin/promo", "routes/admin/promo.tsx"),
     route("admin/accounts", "routes/admin/account-management.tsx"),
     route("admin/accounts/create", "routes/admin/accounts/create.tsx"),
     route("admin/accounts/:id/update", "routes/admin/accounts/update.tsx"),
   ]),
+  // ─── Catch-all (silences Chrome DevTools probes) ─────────────────────────────
+  route("*", "routes/catchall.tsx"),
 ] satisfies RouteConfig;

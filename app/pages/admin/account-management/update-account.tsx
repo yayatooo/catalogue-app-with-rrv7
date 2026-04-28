@@ -1,52 +1,9 @@
-import { redirect, useLoaderData, useActionData } from "react-router";
-import { getUserById, updatePassword } from "~/src/services/auth-services";
-import { updatePasswordSchema } from "~/src/dto/auth.dto";
+import { Form, useActionData, useLoaderData } from "react-router";
+import type { loader } from "~/routes/admin/accounts/update";
 
-type ActionErrors = {
-  currentPassword?: string[];
-  newPassword?: string[];
-  confirmPassword?: string[];
-};
-type ActionData = { errors: ActionErrors } | null;
-
-export async function loader({ params }: { params: { id: string } }) {
-  const user = await getUserById(params.id);
-  if (!user) throw redirect("/admin/accounts");
-  return { user };
-}
-
-export async function action({
-  request,
-  params,
-}: {
-  request: Request;
-  params: { id: string };
-}) {
-  const form = await request.formData();
-
-  const parsed = updatePasswordSchema.safeParse({
-    currentPassword: form.get("currentPassword"),
-    newPassword: form.get("newPassword"),
-    confirmPassword: form.get("confirmPassword"),
-  });
-
-  if (!parsed.success) {
-    const errors: ActionErrors = {};
-    for (const issue of parsed.error.issues) {
-      const field = issue.path[0] as keyof ActionErrors;
-      if (!errors[field]) errors[field] = [];
-      errors[field]!.push(issue.message);
-    }
-    return { errors };
-  }
-
-  try {
-    await updatePassword(params.id, parsed.data.newPassword);
-    return redirect("/admin/accounts");
-  } catch (err: unknown) {
-    return { errors: { currentPassword: [(err as Error).message] } };
-  }
-}
+type ActionData = {
+  errors: { currentPassword?: string[]; newPassword?: string[]; confirmPassword?: string[] };
+} | null;
 
 export default function UpdateAccount() {
   const { user } = useLoaderData<typeof loader>();
@@ -62,7 +19,7 @@ export default function UpdateAccount() {
         <p><span className="font-medium">Role:</span> {user.role}</p>
       </div>
 
-      <form method="post" className="space-y-4">
+      <Form method="post" className="space-y-4">
         <h2 className="font-medium">Change Password</h2>
         <div className="space-y-1">
           <label className="text-sm font-medium">Current Password</label>
@@ -111,7 +68,7 @@ export default function UpdateAccount() {
             Cancel
           </a>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }

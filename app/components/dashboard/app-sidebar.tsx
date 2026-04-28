@@ -1,4 +1,4 @@
-import { Bot, Soup, SquareTerminal } from "lucide-react";
+import { BookCopy, CookingPot, Soup } from "lucide-react";
 
 import {
   Sidebar,
@@ -20,7 +20,12 @@ const data = {
   },
   teams: [
     {
-      name: "Shudaxia Dashboard",
+      name: "Shudaxia Phnom Penh",
+      logo: Soup,
+      plan: "Enterprise",
+    },
+    {
+      name: "Shudaxia Shianoukvile",
       logo: Soup,
       plan: "Enterprise",
     },
@@ -28,36 +33,36 @@ const data = {
   navMain: [
     {
       title: "Platform",
-      url: "#",
-      icon: SquareTerminal,
+      url: "/admin/catalogue",
+      icon: CookingPot,
       isActive: true,
       items: [
         {
-          title: "Products",
-          url: "#",
+          title: "Catalogue",
+          url: "/admin/catalogue",
         },
         {
           title: "Promo",
-          url: "#",
+          url: "/admin/promo",
         },
       ],
     },
     {
       title: "Master Data",
-      url: "#",
-      icon: Bot,
+      url: "/admin/categories",
+      icon: BookCopy,
       items: [
         {
           title: "Categories",
-          url: "#",
+          url: "/admin/categories",
         },
         {
           title: "Attributes",
-          url: "#",
+          url: "/admin/attributes",
         },
         {
-          title: "Account management",
-          url: "#",
+          title: "Accounts",
+          url: "/admin/accounts",
         },
       ],
     },

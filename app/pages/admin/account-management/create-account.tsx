@@ -1,36 +1,8 @@
-import { redirect, useActionData } from "react-router";
-import { register } from "~/src/services/auth-services";
-import { registerSchema } from "~/src/dto/auth.dto";
+import { Form, useActionData } from "react-router";
 
-type ActionErrors = { email?: string[]; password?: string[]; name?: string[] };
-type ActionData = { errors: ActionErrors } | null;
-
-export async function action({ request }: { request: Request }) {
-  const form = await request.formData();
-
-  const parsed = registerSchema.safeParse({
-    email: form.get("email"),
-    password: form.get("password"),
-    name: form.get("name"),
-  });
-
-  if (!parsed.success) {
-    const errors: ActionErrors = {};
-    for (const issue of parsed.error.issues) {
-      const field = issue.path[0] as keyof ActionErrors;
-      if (!errors[field]) errors[field] = [];
-      errors[field]!.push(issue.message);
-    }
-    return { errors };
-  }
-
-  try {
-    await register(parsed.data);
-    return redirect("/admin/accounts");
-  } catch (err: unknown) {
-    return { errors: { email: [(err as Error).message] } };
-  }
-}
+type ActionData = {
+  errors: { name?: string[]; email?: string[]; password?: string[] };
+} | null;
 
 export default function CreateAccount() {
   const data = useActionData<ActionData>();
@@ -38,7 +10,7 @@ export default function CreateAccount() {
   return (
     <div className="max-w-md space-y-6">
       <h1 className="text-xl font-semibold">Create Account</h1>
-      <form method="post" className="space-y-4">
+      <Form method="post" className="space-y-4">
         <div className="space-y-1">
           <label className="text-sm font-medium">Name</label>
           <input
@@ -85,7 +57,7 @@ export default function CreateAccount() {
             Cancel
           </a>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
