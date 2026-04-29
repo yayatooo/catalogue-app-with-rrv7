@@ -54,6 +54,15 @@ export async function updateCategory(
   return rows[0] ?? null;
 }
 
+export async function getCategoryById(id: string) {
+  const rows = await db
+    .select()
+    .from(categories)
+    .where(eq(categories.id, id))
+    .limit(1);
+  return rows[0] ?? null;
+}
+
 export async function deleteCategory(id: string) {
   const rows = await db
     .delete(categories)

@@ -4,6 +4,13 @@ import { register } from "~/src/services/auth-services";
 import { registerSchema } from "~/src/dto/auth.dto";
 import CreateAccount from "~/pages/admin/account-management/create-account";
 
+export function meta() {
+  return [
+    { title: "Create Account | Admin" },
+    { name: "description", content: "Create Account Admin" },
+  ];
+}
+
 export async function action({ request }: Route.ActionArgs) {
   const form = await request.formData();
   const parsed = registerSchema.safeParse(Object.fromEntries(form));

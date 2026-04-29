@@ -20,7 +20,11 @@ export default [
   // ─── Admin ───────────────────────────────────────────────────────────────────
   layout("routes/admin.tsx", [
     route("admin/categories", "routes/admin/categories.tsx"),
+    route("admin/categories/create", "routes/admin/categories/create.tsx"),
+    route("admin/categories/:id/update", "routes/admin/categories/update.tsx"),
     route("admin/attributes", "routes/admin/attribute.tsx"),
+    route("admin/attributes/create", "routes/admin/attributes/create.tsx"),
+    route("admin/attributes/:id/update", "routes/admin/attributes/update.tsx"),
     route("admin/catalogue", "routes/admin/catalogue.tsx"),
     route("admin/promo", "routes/admin/promo.tsx"),
     route("admin/accounts", "routes/admin/account-management.tsx"),

@@ -14,6 +14,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "~/components/ui/sidebar";
 
 export function NavMain({
@@ -28,6 +29,11 @@ export function NavMain({
   }[];
 }) {
   const { pathname } = useLocation();
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  function handleLinkClick() {
+    if (isMobile) setOpenMobile(false);
+  }
 
   return (
     <SidebarGroup>
@@ -59,7 +65,7 @@ export function NavMain({
                           asChild
                           isActive={pathname === subItem.url}
                         >
-                          <Link to={subItem.url}>
+                          <Link to={subItem.url} onClick={handleLinkClick}>
                             <span>{subItem.title}</span>
                           </Link>
                         </SidebarMenuSubButton>
