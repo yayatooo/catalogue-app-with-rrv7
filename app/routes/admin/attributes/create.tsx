@@ -2,6 +2,13 @@ import { redirect } from "react-router";
 import { createAttribute } from "~/src/services/attribute-services";
 import CreateAttribute from "~/pages/admin/attribute/create-attribute";
 
+export function meta() {
+  return [
+    { title: "Create Attribute and Values | Admin" },
+    { name: "description", content: "Create Attribute and Values" },
+  ];
+}
+
 export async function action({ request }: { request: Request }) {
   const form = await request.formData();
 
