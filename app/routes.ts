@@ -26,6 +26,8 @@ export default [
     route("admin/attributes/create", "routes/admin/attributes/create.tsx"),
     route("admin/attributes/:id/update", "routes/admin/attributes/update.tsx"),
     route("admin/catalogue", "routes/admin/catalogue.tsx"),
+    route("admin/catalogue/create", "routes/admin/catalogue/create.tsx"),
+    route("admin/catalogue/:id/update", "routes/admin/catalogue/update.tsx"),
     route("admin/promo", "routes/admin/promo.tsx"),
     route("admin/accounts", "routes/admin/account-management.tsx"),
     route("admin/accounts/create", "routes/admin/accounts/create.tsx"),

@@ -15,6 +15,7 @@ import { relations } from "drizzle-orm";
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export type MenuItemImage = {
+  key: string;
   url: string;
   alt?: string;
   sortOrder: number;
